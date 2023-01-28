@@ -1,0 +1,9 @@
+[{
+  "_id": {
+    "$oid": "62cd5e005b24df2b5906ff7c"
+  },
+  "korime": "admin",
+  "lozinka": "Admin123!",
+  "ime": "Nevena",
+  "prezime": "Bojkovic"
+}]
