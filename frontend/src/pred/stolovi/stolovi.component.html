@@ -1,0 +1,152 @@
+<span *ngIf="korisnik.kategorija=='p'">
+<div class="row">
+    <div class="row secRow ">
+        <div class='col-lg-12' style="margin-left: 15px;">
+            <form>
+                <button *ngFor="let p of odeljenjaBaza" (click)="prikaziOdeljenje(p.naziv)"
+                    class="btn btn-link link">{{p.naziv}}</button>
+                <button class="btn btn-link link" (click)="odeljModal()">Unos novog odeljenja</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row secRow ">
+        <div class='col-lg-12' style="margin-left: 15px;">
+            <form>
+                <button (click)="dodajSto()" class="btn btn-secondary" align="right">Dodaj
+
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" id="canvas_div" style="display:block; overflow:hidden; ">
+    <div class="col-lg-12">
+        <table>
+            <span *ngFor='let a of sirina; let i=index'>
+                <tr *ngFor='let b of duzina'>
+                    <td>
+                        <span>
+                            <img src="../../../assets/travamanja1.jpg" alt='Card image' id="{{b*si+a}}"
+                                style="margin-top: 1px;margin-bottom: 1px;margin-left: 1px;margin-right: 1px;">
+                        </span>
+
+                    </td>
+                </tr>
+            </span>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal" id="mojModal" [style.display]="prikaziDodaj ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" (click)="hideSto()"
+                    align="right">&times;</button>
+
+                ID stola: <input class="form-control" type="text" [(ngModel)]="idStola">
+                <br />
+                Sirina stola(px): <input class="form-control" type="text" [(ngModel)]="sirinaStola">
+                <br />
+                Visina stola(px): <input class="form-control" type="text" [(ngModel)]="visinaStola">
+                <br />
+                Tip stola:
+                <select [(ngModel)]="tipStola">
+                    <option value="okrugli">Okrugli</option>
+                    <option value="pravougaoni">Pravougaoni</option>
+                </select>
+                <br>
+                <br>
+                <span>{{messageSto}}</span>
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="noviSto()" class="btn btn-success" align="right">Dodaj
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hideSto()">Zatvori</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal" id="mojModal" [style.display]="prikaziOd ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" (click)="hideOdeljenje()"
+                    align="right">&times;</button>
+
+                Naziv odeljenja: <input class="form-control" type="text" [(ngModel)]="nazivOdlj">
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="novoOdeljenje()" class="btn btn-success" align="right">Dodaj
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="hideOdeljenje()">Zatvori</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div *ngIf="kliknuoId !=0 ">
+    Trenutno izabran sto - <b>ID:{{kliknuoId}}</b>
+</div>
+
+
+</span>
+
+
+<button mat-stroked-button (click)="otvoriRacun()">Otvori racun</button>
+
+
+<table class="table table-sm" style="margin-left: 20px;">
+    <thead>
+        <tr>
+            <th>Artikl</th>
+            <th>Cena</th>
+            <th>Kolicina</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let r of svaRoba">
+        <tr>
+            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="r.naziv" required disabled></th>
+            <th></th>
+            <th><input class="form-control" type="text" name="narucenaKolicina" [(ngModel)]="narucenaKolicina" required></th>
+
+            <th>
+                <select name="mag" [(ngModel)]="izabranMagacin">
+                    <option *ngFor="let a of r.magacini" value="{{a.magacin}}">{{a.magacin}} {{a.prodajnaCena}}</option>
+                </select>
+
+            </th>
+            <th> <button (click)="naruci(r)" class="btn btn-secondary" align="right">Naruci
+                </button></th>
+            <th>{{message}}</th>
+        </tr>
+
+    </tbody>
+</table>

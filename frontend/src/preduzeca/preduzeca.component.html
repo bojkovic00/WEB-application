@@ -1,0 +1,202 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+
+</div>
+
+<div class='container-fluid pozadina'>
+
+    <div class="row ">
+        <div class="col-lg-1"></div>
+        <div class='col-lg-6'>
+
+            <form>
+
+                <table class="table table-sm" style="margin-left: 150px; margin-top: 50px;">
+                    <tr>
+                        <td style="width: 120px;">Kategorija preduzeća</td>
+                        <td colspan="4">
+
+                            <input type="radio" [(ngModel)]='prod' name="prod" value="p">Prodavnica
+                            <input type="radio" [(ngModel)]='prod' name="prod" value="u">Ugostiteljski objekat
+
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="width: 120px;">
+                            <br>
+                            Šifra delatnosti
+                        </td>
+                        <td colspan="4">
+                            <br>
+
+                            <select class="form-control form-select-lg mb-3" multiple (change)="promenaSifre($event)"
+                                style="max-width: 200px">
+                                <option *ngFor="let a of sifre" value="a.id">{{a.naziv}} </option>
+                            </select>
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="width: 120px;">
+                            <br>
+                            PDV
+                        </td>
+
+
+                        <td colspan="4">
+                            <br>
+
+                            <input type="checkbox" value="1" name="pdv" [(ngModel)]="pdv">
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 120px;">
+                            <br>
+                            Broj računa
+                        </td>
+                        <td>
+                            <br>
+                            <input class="form-control" type="text" name="{{brRacuna}}" [(ngModel)]="brojRacuna"
+                                required>
+                        </td>
+                        <td style="width: 120px; padding-left: 65px;">
+                            <br>
+                            Banka
+                        </td>
+                        <td>
+                            <br>
+                            <input class="form-control" type="text" name="{{brRacuna}} " [(ngModel)]="nazivBanke"
+                                required>
+                        </td>
+                        <td>
+                            <br><button (click)="dodajRacun()" class="btn btn-secondary" align="right">Dodaj</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 120px;">
+                            <br>
+                            Broj magacina
+                        </td>
+                        <td colspan="4">
+                            <br>
+                            <input class="form-control" type="text" min="1" name="brMagacina" [(ngModel)]="brMagacina"
+                                (change)="noviMagacini()" required>
+                        </td>
+
+                    </tr>
+
+                    <tr *ngIf="pozicijaMag < brMagacina">
+                        <td>
+                            <br>
+                            ID
+                        </td>
+                        <td>
+                            <br>
+                            <input class="form-control" type="text" name="idMag" [(ngModel)]="pozicijaMag" required
+                                disabled>
+                        </td>
+                        <td style="width: 120px; padding-left: 65px;">
+                            <br>
+                            Naziv
+                        </td>
+                        <td>
+                            <br>
+                            <input class="form-control" type="text" name="nazivMag" [(ngModel)]="nazivMag" required>
+                        </td>
+                        <td>
+                            <br><button (click)="sledeciMag()" class="btn btn-secondary"
+                                align="right">{{pozicijaMag}}/{{brMagacina}} </button>
+                        </td>
+                    </tr>
+
+
+
+
+
+                    <tr>
+                        <td style="width: 120px;">
+                            <br>
+                            Broj kasa
+                        </td>
+                        <td colspan="4">
+                            <br>
+                            <input class="form-control" type="text" min="1" name="brKasa" [(ngModel)]="brKasa"
+                                (change)="noveKase()" required>
+                        </td>
+                    </tr>
+                    <tr *ngIf="pozicija < brKasa">
+                        <td>
+                            <br>
+                            Lokacija
+                        </td>
+                        <td>
+                            <br>
+                            <input class="form-control" type="text" name="{{pozicija}}" [(ngModel)]="Lokacija" required>
+                        </td>
+                        <td>
+                            <br>
+                            Tip
+                        </td>
+                        <td>
+                            <br>
+                            <select class="form-control form-select-lg mb-3" aria-label=".form-select-lg example"
+                                [(ngModel)]="Tip" name="Tip">
+                                <option selected>Open this select menu</option>
+                                <option value="MP-500 T">MP-500 T</option>
+                                <option value="DP-500">DP-500</option>
+                                <option value="GALEB GP-100">GALEB GP-100</option>
+                                <option value="SMART III">SMART III</option>
+                                <option value="BINGO Plus">BINGO Plus</option>
+                                <option value="Thermal">Thermal</option>
+                                <option value="CASH">CASH</option>
+                                <option value="GENEKO MINI">GENEKO MINI</option>
+                                <option value="EUROPA">EUROPA</option>
+                                <option value="QUORION CR 500">QUORION CR 500</option>
+                            </select>
+
+
+                        </td>
+                        <td>
+                            <br><button (click)="sledeci()" class="btn btn-secondary"
+                                align="right">{{pozicija}}/{{brKasa}} </button>
+                        </td>
+                    </tr>
+
+
+
+
+                    <tr align="right">
+
+                        <td> <button (click)="nastaviDalje()" class="btn btn-secondary" align="right">Nastavi </button>
+                        </td>
+                        <td>
+                            <h5 style="color: red;">{{message}}</h5>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>

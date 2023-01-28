@@ -1,0 +1,50 @@
+
+
+
+    <h5>Izveštaj dnevnog pazara</h5>
+
+    <table class="table table-sm" style="margin-left: 20px;">
+        <thead>
+            <tr>
+                <th>Dan</th>
+                <th>Ukupna vrednost</th>
+                <th>Porez</th>
+            </tr>
+
+
+        </thead>
+        <tbody *ngFor="let r of pazari">
+            <tr>
+                <td>{{r.dan}}</td>
+                <td>{{r.vrednost}}</td>
+                <td> {{r.porez}}</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+    <h5>Izveštaj po stavkama</h5>
+    <table class="table table-sm" style="margin-left: 20px;">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Artikli</th>
+            </tr>
+
+
+        </thead>
+        <tbody *ngFor="let r of this.korisnik.zatvoreno">
+
+            <tr>
+                <th>{{r.datum}}</th>
+                <td>
+                    <ul style="list-style-type: none;">
+                        <li *ngFor="let a of r.proizvod">{{a.naziv}}</li>
+                    </ul>
+
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+

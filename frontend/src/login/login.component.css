@@ -1,0 +1,106 @@
+
+/* #menu{
+    text-align: right;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+} */
+body{    
+  
+
+    
+  /*  background-image: url("../../assets/suncokreti2.jpg");*/
+    
+background-size: cover;
+   height: 100%;
+  
+    width:100%;
+   
+    
+    
+    
+    
+   
+}
+
+.poruka{
+    font-weight: bold;
+    font-size: large;
+    color: red;
+
+}
+link{
+    text-decoration: none;
+    color:white;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+a:hover{
+    color:rgba(223, 233, 231, 0.904);
+    text-decoration: underline;
+}
+.fse
+{
+    padding-top: 40px;
+
+    padding-bottom: 20px;
+    background-color: rgb(175, 213, 223)
+}
+
+body{
+    height: 100%;
+    width:100%;
+    
+}
+.klasa
+{
+    padding:60px;
+    /* background-color: rgb(148, 148, 7); */
+}
+
+:host-context(body) {
+    display: block;
+    height: 100%;
+  
+    width:100%;
+    background-size: cover;
+}
+
+.jumbotron
+{
+    background-image: url("../../assets/pozadinaLog.jpg");
+    background-repeat: no-repeat;
+    height: 350px;
+    background-size: 100% 100%;
+  
+    color: white;
+    
+  
+    
+}
+
+.prva{
+    background-color:  rgb(5, 84, 114);
+    background-image: url("../../assets/pozadinaLog.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: black;
+    text-align: right;
+    height: 100px;
+    width: fit-content;
+    
+    
+}
+
+.boja
+{
+    background-color:  rgb(5, 84, 114);
+    text-align: right;
+    padding-top:60px;
+}

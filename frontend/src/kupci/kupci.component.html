@@ -1,0 +1,188 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)='pregledPreduzeca()'>Pregled preduzeća</button>
+                <button class="btn btn-link link" (click)='pregledRacuna()'>Pregled računa</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <span *ngIf="prikaz==1">
+
+            <div class="col-lg-12">
+
+
+
+
+
+                <table align="center" class="table" style="margin-left: 50px; margin-top: 50px;">
+                    <thead class="thead-dark">
+
+                        <tr>
+
+                            <th>Naziv preduzeća</th>
+                            <th>Artikal</th>
+                            <th>Proizvodjac</th>
+                            <th>Najmanja cena</th>
+                            <th>Objekti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let r of svaPreduzeca">
+
+
+
+                            <td>{{r.naziv}}</td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let a of r.proizvodi">{{a.naziv}}</li>
+                                </ul>
+
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let a of r.proizvodi">{{a.proizvodjac}}</li>
+                                </ul>
+
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let a of r.pro">
+                                        <span *ngIf="a!=null">
+                                            {{a.cena}}</span>
+                                    </li>
+                                </ul>
+
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let a of r.pro">
+                                        <span *ngIf="a!=null">
+                                            {{a.mag}}</span>
+                                    </li>
+                                </ul>
+
+                            </td>
+                            <td> Naziv: </td>
+                            <td> <input type="text" class="form-control" [(ngModel)]="naziv"></td>
+
+                            <td>Proizvodjač:</td>
+                            <td><input type="text" class="form-control" [(ngModel)]="proizvodjac"></td>
+                            <td> <button class="btn btn-success" (click)='filtriraj(r)'>Filtriraj</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </span>
+
+        <span *ngIf="prikaz==2">
+
+
+
+            <div class="col-lg-12">
+                <table align="center" class="table" style="margin-left: 50px; margin-top: 50px;">
+                    <thead class="thead-dark">
+                        <tr>
+
+                            <th>Naziv preduzeća</th>
+                            <th>Iznos</th>
+                            <th>Način plaćanja</th>
+                            <th>Odaberi</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of sviRacuni">
+                            <td>{{r.nazivPred}}</td>
+                            <td>{{r.iznos}}</td>
+                            <td>{{r.nacinPlacanja}}</td>
+                            <td><button class="btn btn-success" (click)='odaberi(r)'>Odaberi</button></td>
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+
+                <span *ngIf="prikaz1==1" style="margin-left: 50px; margin-top: 50px;">
+                    <tr>
+                        <th>Artikal</th>
+                        <th>Cena</th>
+                        <th>Porez</th>
+                        <th>Proizvodjac</th>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <ul style="list-style-type: none;">
+                                <li *ngFor="let a of racun.proizvod">{{a.naziv}}</li>
+                            </ul>
+
+                        </td>
+                        <td>
+                            <ul style="list-style-type: none;">
+                                <li *ngFor="let b of racun.cene">{{b}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul style="list-style-type: none;">
+                                <li *ngFor="let c of racun.porezi">{{c}}</li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul style="list-style-type: none;">
+                                <li *ngFor="let a of racun.proizvod">{{a.nazivProizvodjaca}}</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                </span>
+            </div>
+
+<h6 style="margin-left: 100px;">Prikaz grafika</h6>
+<input type="radio" value=1 name="graf" [(ngModel)]="graf" style="margin-left: 50px;">Godišnji
+<input type="radio" value=2 name="graf" [(ngModel)]="graf" style="margin-left: 50px;">Mesečni
+<br>
+<br>
+<br>
+<br>
+
+
+<span *ngIf="graf==1" ><app-grafikon></app-grafikon></span>
+<span *ngIf="graf==2" ><app-grafik></app-grafik></span>
+            
+         
+
+          
+
+
+
+
+        </span>
+    </div>
+</div>
+

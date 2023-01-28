@@ -1,0 +1,162 @@
+
+    <table class="table table-sm" style="margin-left: 20px;">
+        <thead>
+            <tr>
+                <th>Sto</th>
+                <th>Artikl</th>
+                <th>Kolicina</th>
+                <th>Cena</th>
+                <th>Porez</th>
+                <th>Ukupan iznos</th>
+                <th>Način plaćanja</th>
+                <th>Zatvori</th>
+                <th>Ocisti</th>
+            </tr>
+
+
+        </thead>
+        <tbody *ngFor="let r of this.korisnik.naruceno; index as i">
+
+            <tr>
+                <th>{{r.idStola}}</th>
+                <td>
+                    <ul style="list-style-type: none;">
+                        <li *ngFor="let a of r.proizvod">{{a.naziv}}</li>
+                    </ul>
+
+                </td>
+                <td>
+                    <ul style="list-style-type: none;">
+                        <li *ngFor="let c of r.kolicine">{{c}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul style="list-style-type: none;">
+                        <li *ngFor="let b of r.cene">{{b}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul style="list-style-type: none;">
+                        <li *ngFor="let c of r.porezi">{{c}}</li>
+                    </ul>
+                </td>
+                <td>{{r.iznos}}</td>
+                <td>
+                    <table class="table table-sm">
+
+                        <tr>
+
+                            <td>
+                                <select class="form-control form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" [(ngModel)]="tipPlacanja" name="Tip">
+                                    <option value=1>Gotovina</option>
+                                    <option value=2>Ček</option>
+                                    <option value=3>Katrica</option>
+                                    <option value=4>Virman</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+
+                <td>
+                    <button class="btn btn-secondary" (click)="zatvoriRacun(r.idStola)">Zatvori račun</button>
+                </td>
+                <td>
+                    <button class="btn btn-secondary" (click)="ocistiSto(r.idStola)">Očisti</button>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+
+
+
+    <span *ngIf="tipPlacanja==1">
+        <form>
+            <table class="table table-sm" style="margin-left: 20px;">
+
+                <tr>
+                    <td>Vrednost</td>
+                    <td> <input class="form-control" type="text" name="vrednostDao" [(ngModel)]="vrednostDao"
+                            required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Broj licne karte</td>
+                    <td> <input class="form-control" type="text" name="brojLicne" [(ngModel)]="brojLicne"
+                            required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kusur</td>
+                    <td>
+                        <input class="form-control" type="text" name="kusur" [(ngModel)]="kusur" required
+                            disabled>
+
+
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </span>
+    <span *ngIf="tipPlacanja==2">
+        <table class="table table-sm" style="margin-left: 20px;">
+
+            <tr>
+                <td>Ime i prezime</td>
+                <td> <input class="form-control" type="text" name="imePrezime" [(ngModel)]="imePrezime"
+                        required>
+                </td>
+            </tr>
+            <tr>
+                <td>Broj licne karte</td>
+                <td> <input class="form-control" type="text" name="brojLicnea" (ng-value)="brojLicne" required>
+                </td>
+            </tr>
+
+        </table>
+
+    </span>
+    <span *ngIf="tipPlacanja==3">
+        <table class="table table-sm" style="margin-left: 20px;">
+
+            <tr>
+                <td>Broj licne karte</td>
+                <td> <input class="form-control" type="text" name="brojLicne" [(ngModel)]="brojLicne" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Broj slip računa</td>
+                <td> <input class="form-control" type="text" name="vrednostDao" [(ngModel)]="slipRacun"
+                        required>
+                </td>
+            </tr>
+
+        </table>
+
+    </span>
+    <span *ngIf="tipPlacanja==4">
+        <table class="table table-sm" style="margin-left: 20px;">
+
+            <tr>
+                <td>Naručilac</td>
+                <td>
+                    <select class="form-control form-select-lg mb-3" [(ngModel)]="izabraniN"
+                        style="max-width: 200px">
+                        <option *ngFor="let a of naruciociNiz" [ngValue]="a">{{a.preduzece.naziv}} </option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+
+    </span>
+

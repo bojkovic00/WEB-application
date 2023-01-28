@@ -1,0 +1,176 @@
+
+<form>
+    <br>
+    <h5 style="margin-left: 350px;">Dodaj naručioca</h5>
+    <table class="table table-sm" style="margin-left: 150px; margin-top: 50px;">
+        <tr>
+            <td>Ime i prezime odgovornog lica</td>
+            <td>
+                <input class="form-control" type="text" name="nodgLice" [(ngModel)]="nodgLice"
+                    required>
+            </td>
+        </tr>
+        <tr>
+            <td>Korisnicko ime</td>
+            <td>
+                <input class="form-control" type="text" name="npusername" [(ngModel)]="npusername"
+                    required>
+            </td>
+        </tr>
+        <tr>
+            <td>Lozinka</td>
+            <td>
+                <input class="form-control" type="password" name="npsifra1" [(ngModel)]="npsifra1"
+                    required>
+            </td>
+        </tr>
+        <tr>
+            <td>Potvrda lozinke</td>
+            <td>
+                <input class="form-control" type="password" name="npsifra2" [(ngModel)]="npsifra2">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Telefon</td>
+            <td>
+                <input class="form-control" type="text" name="ntelefon" [(ngModel)]="ntelefon"
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email</td>
+            <td>
+                <input class="form-control" type="email" name="npmail" [(ngModel)]="npmail" email>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Naziv preduzeća</td>
+            <td>
+                <input class="form-control" type="text" name="npnaziv" [(ngModel)]="npnaziv"
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Adresa</td>
+            <td>
+                <input class="form-control" type="text" name="npadresa" [(ngModel)]="npadresa"
+                    required>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>PIB</td>
+            <td>
+                <input class="form-control" type="text" name="npib" [(ngModel)]="npib" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Matični broj preduzeća</td>
+            <td>
+                <input class="form-control" type="text" name="nmbroj" [(ngModel)]="nmbroj" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Logo preduzeca: </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="file" name="image" (change)="handleFileInput($event)" required>
+            </td>
+        </tr>
+        <tr>
+            <img src="{{url}}">
+        </tr>
+
+
+        <tr>
+            <td>Broj dana</td>
+            <td>
+                <input class="form-control" type="text" name="nbrDana" [(ngModel)]="nbrDana"
+                    required>
+            </td>
+        </tr>
+        <tr>
+            <td>Procenat rabata</td>
+            <td>
+                <input class="form-control" type="text" name="nprocenatRabata"
+                    [(ngModel)]="nprocenatRabata" required>
+            </td>
+        </tr>
+
+
+        <tr align="right">
+            <td></td>
+            <td> <button (click)="registrujNarucioca()" class="btn btn-secondary"
+                    align="right">Dodaj naručioca</button></td>
+
+        </tr>
+        {{nmessage}}
+    </table>
+</form>
+
+
+
+<table class="table table-sm" style="margin-left: 150px; margin-top: 50px;">
+    <br>
+    <br>
+    <h5 style="margin-left: 350px;">Pretraži naručioca </h5>
+    <tr>
+        <td> PIB</td>
+        <td>
+            <input class="form-control" type="text" name="pusername" [(ngModel)]="nPIB" required>
+        </td>
+    </tr>
+
+    <tr align="right">
+        <td></td>
+        <td> <button (click)="pretraziPIB()" class="btn btn-secondary"
+                align="right">Pretraži</button></td>
+
+    </tr>
+    <tr>
+        <td>Broj dana</td>
+        <td>
+            <input class="form-control" type="text" name="brDana" [(ngModel)]="brDana" required>
+        </td>
+    </tr>
+    <tr>
+        <td>Procenat rabata</td>
+        <td>
+            <input class="form-control" type="text" name="procenatRabata"
+                [(ngModel)]="procenatRabata" required>
+        </td>
+
+
+    </tr>
+    <tr>
+        <select class="form-control form-select-lg mb-3" [(ngModel)]="izabraniN"
+            style="max-width: 200px">
+            <option *ngFor="let a of preduzecaNiz" [ngValue]="a">{{a.naziv}} </option>
+        </select>
+        <td></td>
+        <td> <button (click)="dodajNarucioca()" class="btn btn-secondary" align="right">Dodaj
+                naručioca</button></td>
+    </tr>
+
+
+
+
+
+
+
+</table>
+
+
+
+
+

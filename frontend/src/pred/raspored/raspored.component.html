@@ -1,0 +1,141 @@
+
+
+<table class="table table-sm">
+    <tr>
+        <td>Kategorija</td>
+        <td>
+            <select class="form-control form-select-lg mb-3" aria-label=".form-select-lg example"
+                [(ngModel)]="kategorija" name="kategorija">
+                <option value="Piće">Piće</option>
+                <option value="Hrana">Hrana</option>
+                <option value="Ketering">Ketering</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Potkategorija</td>
+        <span *ngIf="kategorija==''"> <select class="form-control form-select-lg mb-3"
+                aria-label=".form-select-lg example" [(ngModel)]="potkategorija" name="Potkategorija">
+            </select></span>
+        <span *ngIf="kategorija=='Piće'">
+            <td>
+                <select class="form-control form-select-lg mb-3" aria-label=".form-select-lg example"
+                    [(ngModel)]="potkategorija" name="Potkategorija">
+                    <option value="Topli napici">Topli napici</option>
+                    <option value="Vode i sokovi">Vode i sokovi</option>
+                    <option value="Vina">Vina</option>
+                    <option value="Piva">Piva</option>
+                </select>
+            </td>
+        </span>
+        <span *ngIf="kategorija=='Hrana'">
+            <td>
+                <select class="form-control form-select-lg mb-3" aria-label=".form-select-lg example"
+                    [(ngModel)]="potkategorija" name="Potkategorija">
+                    <option value="Salata">Salata</option>
+                    <option value="Meso">Meso</option>
+                    <option value="Supe, čorbe">Supe, čorbe</option>
+                    <option value="Morski plodovi">Morski plodovi</option>
+                    <option value="Dezerti">Dezerti</option>
+                </select>
+            </td>
+        </span>
+        <span *ngIf="kategorija=='Ketering'">
+            <td>
+                <select class="form-control form-select-lg mb-3" aria-label=".form-select-lg example"
+                    [(ngModel)]="potkategorija" name="Potkategorija">
+                    <option value="Peciva">Peciva</option>
+                    <option value="Mafini">Mafini</option>
+                    <option value="Mini pice">Mini pice</option>
+                </select>
+            </td>
+        </span>
+    </tr>
+
+    <tr>
+        <td> <button (click)="dodeliArtikl()" class='btn btn-success'>Dodeli artikl
+            </button></td>
+    </tr>
+
+
+</table>
+
+
+
+<div class="modal" id="mojModal" [style.display]="prikazi ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()" align="right">&times;</button>
+
+                <table class="table table-sm" style="margin-left: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Naziv artikla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <table class="styled-table-scnd">
+                            <tr>
+                                <th> <input type="text" class="form-control" [(ngModel)]="filter"> Naziv</th>
+                                <th><button class="btn btn-success" (click)="filtriraj()"
+                                        style="margin-left: 50px;">Primeni filter</button></th>
+                            </tr>
+
+                        </table>
+
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Previous" (click)="preth()" style="color: black;">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+
+                                <li *ngFor="let a of brojevi" class="page-item"><a class="page-link"
+                                        (click)="promenaBr(a)" style="color: black;" [class.red]='a==br'>{{a}}</a></li>
+
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next" (click)="next()" style="color: black;">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <table class="styled-table-scnd">
+                            <tr>
+                                <th>Artikli</th>
+                            </tr>
+                            <tr class="active-row">
+                                <div *ngFor="let r of robaStr">
+                                    <div *ngIf="r!=null">
+                                        <td>{{r.naziv}}</td>
+                                        <td><button class="btn btn-success" (click)="promeniKategoriju(r)"
+                                                style="margin-left: 50px;">Dodaj</button></td>
+                                    </div>
+                                </div>
+                            </tr>
+                        </table>
+
+
+
+                    </tbody>
+                </table>
+                {{message}}
+
+            </div>
+            <div class="modal-footer">
+
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Zatvori</button>
+            </div>
+        </div>
+
+    </div>
+</div>

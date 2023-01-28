@@ -1,0 +1,222 @@
+
+  
+    <div class="row secRow ">
+        <div class='col-lg-12'>
+            <form>
+                <button class="btn btn-link link" (click)='opstiPod()'>Opšti podaci</button>
+                <button class="btn btn-link link" (click)='ziroRac()'>Žiro računi</button>
+                <button class="btn btn-link link" (click)='magKase()'>Magacini i kase</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+           
+            <span *ngIf="prikazPod==1">
+
+                <br>
+                <table class="table table-sm" style="margin-left: 20px;">
+
+                    <tr>
+                        <td>Ime i prezime odgovornog lica</td>
+                        <td>
+                            <input class="form-control" type="text" name="odgLice" [(ngModel)]="korisnik.odgLice"
+                                required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Korisnicko ime</td>
+                        <td>
+                            <input class="form-control" type="text" name="username" [(ngModel)]="korisnik.korIme"
+                                required disabled>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Telefon</td>
+                        <td>
+                            <input class="form-control" type="number" name="telefon" [(ngModel)]="korisnik.telefon"
+                                required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input class="form-control" type="text" name="mail" [(ngModel)]="korisnik.mail" email>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Adresa</td>
+                        <td>
+                            <input class="form-control" type="text" name="padresa" [(ngModel)]="korisnik.adresa" required
+                                disabled>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>PIB</td>
+                        <td>
+                            <input class="form-control" type="number" name="pib" [(ngModel)]="korisnik.pib" required
+                                disabled>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Matični broj preduzeća</td>
+                        <td>
+                            <input class="form-control" type="text" name="mbroj" [(ngModel)]="korisnik.mbroj" required
+                                disabled>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Logo</td>
+                        <td>
+                            <img src="{{korisnik.img}}">
+                        </td>
+                    </tr>
+
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="potvrdaPromOpste()" class="btn btn-secondary"
+                                align="right">Promeni podatke
+                            </button></td>
+                    </tr>
+
+                </table>
+            </span>
+
+
+
+            <span *ngIf="prikazPod==2">
+
+
+                <br>
+                <table class="table table-sm" style="margin-left: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Banka</th>
+                            <th>Broj računa</th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody *ngFor="let r of korisnik.racuni">
+                        <tr>
+                            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="r.nazivBanke"
+                                    required></th>
+                            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="r.brRacuna"
+                                    required></th>
+                        </tr>
+
+                    </tbody>
+
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="potvrdaPromRacuna()" class="btn btn-secondary"
+                                align="right">Promeni podatke
+                            </button></td>
+                    </tr>
+
+                </table>
+
+
+
+
+
+            </span>
+ 
+            <span *ngIf="prikazPod==3">
+                <br>
+                <h4 style="margin-left: 200px">Magacini</h4>
+                <br>
+                <table class="table table-sm" style="margin-left: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Naziv</th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody *ngFor="let m of korisnik.magacini">
+                        <tr>
+                            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="m.brMag"
+                                    required></th>
+                            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="m.naziv"
+                                    required></th>
+                        </tr>
+
+                    </tbody>
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="potvrdaPromMagacina()" class="btn btn-secondary"
+                                align="right">Promeni podatke
+                            </button></td>
+                    </tr>
+                </table>
+
+                <br>
+                <h4 style="margin-left: 220px">Kase</h4>
+
+                <br>
+                <table class="table table-sm" style="margin-left: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Lokacija</th>
+                            <th>Tip</th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody *ngFor="let k of korisnik.kase">
+                        <tr>
+                            <th><input class="form-control" type="text" name="mbroj" [(ngModel)]="k.Lokacija"
+                                    required></th>
+                            <th>
+                                <select class="form-control form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" [(ngModel)]="k.Tip" name="Tip">
+                                    <option selected>{{k.Tip}}</option>
+                                    <option value="MP-500 T">MP-500 T</option>
+                                    <option value="DP-500">DP-500</option>
+                                    <option value="GALEB GP-100">GALEB GP-100</option>
+                                    <option value="SMART III">SMART III</option>
+                                    <option value="BINGO Plus">BINGO Plus</option>
+                                    <option value="Thermal">Thermal</option>
+                                    <option value="CASH">CASH</option>
+                                    <option value="GENEKO MINI">GENEKO MINI</option>
+                                    <option value="EUROPA">EUROPA</option>
+                                    <option value="QUORION CR 500">QUORION CR 500</option>
+                                </select>
+
+                            </th>
+                        </tr>
+
+                    </tbody>
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="potvrdaPromKasa()" class="btn btn-secondary" align="right">Promeni
+                                podatke
+                            </button></td>
+                    </tr>
+                </table>
+
+
+
+
+
+
+
+            </span>
+            
+        </div>
+    </div>
+
+
+
+
+
