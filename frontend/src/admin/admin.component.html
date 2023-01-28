@@ -1,0 +1,308 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)='pristigli()'>Pregled pristiglih zahteva</button>
+                <button class="btn btn-link link" (click)='pregledIzvestaja()'>Pregled izveštaja</button>
+                <button class="btn btn-link link" (click)='dodajKupca()'>Dodaj Kupca</button>
+                <button class="btn btn-link link" (click)='dodajPreduzece()'>Dodaj Preduzeće</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <span *ngIf="prikaz==1">
+
+            <div class="col-lg-12">
+                <table align="center" class="table" style="margin-left: 50px; margin-top: 50px;">
+                    <thead class="thead-dark">
+                        <tr>
+
+                            <th>Korisničko ime</th>
+                            <th>Naziv preduzeća</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of preduzeca">
+
+                            <td>{{a.korIme}}</td>
+                            <td>{{a.naziv}}</td>
+
+                            <td>
+                                <span *ngIf="a.prihvacen==''"> <button class='btn btn-success'
+                                        (click)="prihvatiZahtev(a.korIme)">Prihvati</button></span>
+                                <span *ngIf="a.prihvacen=='neaktivan'"> <button class='btn btn-success'
+                                        (click)="aktiviraj(a.korIme)">Aktiviraj</button></span>
+                                <span *ngIf="a.prihvacen=='aktivan'"> <button class='btn btn-danger'
+                                        (click)="deaktiviraj(a.korIme)">Deaktiviraj</button></span>
+                            </td>
+                            <td>
+                                <span *ngIf="a.prihvacen==''"> <button class='btn btn-danger'
+                                        (click)="odbijZahtev(a.korIme)">Odbaci</button></span>
+                                <span *ngIf="a.prihvacen!=''"></span>
+
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+
+        </span>
+        <span *ngIf="prikaz==2">
+            <div class="col-lg-12">
+
+                <table align="center" style="margin-left: 150px; margin-top: 50px;">
+                    <tr>
+                        <td>Naziv preduzeca</td>
+                        <td><input type="text" class="form-control" [(ngModel)]="naziv"></td>
+                    </tr>
+                    <tr>
+                        <td>PIB</td>
+                        <td><input type="text" class="form-control" [(ngModel)]="pibF"></td>
+                    </tr>
+                    <tr>
+                        <td>Datum od</td>
+                        <td><input type="text" class="form-control" [(ngModel)]="datumOdd"></td>
+                    </tr>
+                    <tr>
+                        <td>Datum do</td>
+                        <td><input type="text" class="form-control" [(ngModel)]="datumDoo"></td>
+                    </tr>
+                    <tr>
+                        <button (click)="filtriraj()" class="btn btn-secondary" align="right">Filtriraj</button>
+                    </tr>
+                </table>
+
+
+
+
+                <table align="center" class="table" style="margin-left: 150px; margin-top: 50px;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Naziv preduzeća</th>
+                            <th>Dan</th>
+                            <th>Vrednost</th>
+                            <th>Porez</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of preduzecaPrikaz">
+                            <td>{{a.naziv}}</td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let c of a.pazari">
+                                        <span *ngIf="c.dan>=datumOd && c.dan<=datumDo ">
+                                            {{c.dan}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let c of a.pazari">
+                                        <span *ngIf="c.dan>=datumOd && c.dan<=datumDo">
+                                            {{c.vrednost}}
+                                        </span>
+                                        
+                                      </li>
+                                </ul>
+                            </td>
+
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let c of a.pazari">
+                                        <span *ngIf="c.dan>=datumOd && c.dan<=datumDo">
+                                            {{c.porez}}
+                                        </span>
+                                      </li>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </span>
+        <span *ngIf="prikaz==3">
+            <form>
+
+                <table class="table table-sm" style="margin-left: 150px; margin-top: 50px;">
+
+                    <tr>
+                        <td>Korisnicko ime</td>
+                        <td>
+                            <input class="form-control" type="text" name="kusername" [(ngModel)]="kusername" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lozinka</td>
+                        <td>
+                            <input class="form-control" type="password" name="ksifra" [(ngModel)]="ksifra" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ime</td>
+                        <td>
+                            <input class="form-control" type="text" name="kime" [(ngModel)]="kime" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prezime</td>
+                        <td>
+                            <input class="form-control" type="text" name="kprezime" [(ngModel)]="kprezime" required>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>Telefon</td>
+                        <td>
+                            <input class="form-control" type="text" name="ktelefon" [(ngModel)]="ktelefon" required>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Broj lične karte</td>
+                        <td>
+                            <input class="form-control" type="text" name="kbroj" [(ngModel)]="kbroj" required>
+                        </td>
+                    </tr>
+
+
+
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="registrujKupca()" class="btn btn-secondary"
+                                align="right">Registruj</button></td>
+
+                    </tr>
+                    {{mmessage}}
+                </table>
+
+            </form>
+        </span>
+        <span *ngIf="prikaz==4">
+            <form>
+
+                <table class="table table-sm" style="margin-left: 150px; margin-top: 50px;">
+                    <tr>
+                        <td>Ime i prezime odgovornog lica</td>
+                        <td>
+                            <input class="form-control" type="text" name="odgLice" [(ngModel)]="odgLice" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Korisnicko ime</td>
+                        <td>
+                            <input class="form-control" type="text" name="pusername" [(ngModel)]="pusername" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lozinka</td>
+                        <td>
+                            <input class="form-control" type="password" name="psifra1" [(ngModel)]="psifra1" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Potvrda lozinke</td>
+                        <td>
+                            <input class="form-control" type="password" name="psifra2" [(ngModel)]="psifra2">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Telefon</td>
+                        <td>
+                            <input class="form-control" type="text" name="telefon" [(ngModel)]="telefon" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input class="form-control" type="email" name="pmail" [(ngModel)]="pmail" email>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Naziv preduzeća</td>
+                        <td>
+                            <input class="form-control" type="text" name="pnaziv" [(ngModel)]="pnaziv" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Adresa</td>
+                        <td>
+                            <input class="form-control" type="text" name="padresa" [(ngModel)]="padresa" required>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>PIB</td>
+                        <td>
+                            <input class="form-control" type="text" name="pib" [(ngModel)]="pib" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Matični broj preduzeća</td>
+                        <td>
+                            <input class="form-control" type="text" name="mbroj" [(ngModel)]="mbroj" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Logo preduzeca: </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="file" name="image" (change)="handleFileInput($event)" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <img src="{{url}}">
+                    </tr>
+
+
+                    <tr align="right">
+                        <td></td>
+                        <td> <button (click)="registrujPreduzece()" class="btn btn-secondary"
+                                align="right">Registruj</button></td>
+
+                    </tr>
+                </table>
+
+            </form>
+        </span>
+
+    </div>
+
+</div>
